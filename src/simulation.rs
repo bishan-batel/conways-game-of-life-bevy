@@ -38,7 +38,7 @@ impl Plugin for SimulationPlugin {
             )
             .add_system_set(
                 SystemSet::new()
-                    // .with_run_criteria(FixedTimestep::step(0.25))
+                    .with_run_criteria(FixedTimestep::step(0.25))
                     .with_system(
                         simulation_step
                             .label(CellInteraction::Simulation)
@@ -88,11 +88,13 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
 
     for x in 0..GRID_SIZE {
         for y in 0..GRID_SIZE {
-            let (state, texture) = if (x+y) % 2 == 0 {
-                (CellState::Empty, images.empty_cell.clone())
-            } else {
-                (CellState::Alive, images.alive_cell.clone())
-            };
+            // let (state, texture) = if (x+y) % 2 == 0 {
+            //     (CellState::Empty, images.empty_cell.clone())
+            // } else {
+            //     (CellState::Alive, images.alive_cell.clone())
+            // };
+            let (state, texture) = (CellState::Empty, images.empty_cell.clone());
+
             commands
                 .spawn(SpriteBundle {
                     transform: Transform::from_xyz(
